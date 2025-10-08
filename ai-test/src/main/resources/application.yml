@@ -6,6 +6,27 @@ spring:
   ai:
     dashscope:
       api-key: ${DASHSCOPE_API_KEY}
+      embedding:
+        options:
+          model: text-embedding-v3
       chat:
         options:
           model: deepseek-v3
+    vectorstore:
+      milvus:
+        client:
+          host: "localhost"
+          port: 19530
+          username: "root"
+          password: "milvus"
+        databaseName: "ai_health_assistant"
+        collectionName: "dietary_guidelines"
+        embeddingDimension: 1024
+        indexType: FLAT
+        metricType: COSINE
+        auto-id: true
+        id-field-name: id
+        embedding-field-name: vector
+        metadata-field-name: meata
+        content-field-name: content
+
