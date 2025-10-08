@@ -30,3 +30,7 @@ spring:
         metadata-field-name: meata
         content-field-name: content
 
+tesseract:
+  data-path: D:/Program Files/Tesseract-OCR/tessdata
+  language: chi_sim+eng
+
