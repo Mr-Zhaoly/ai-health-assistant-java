@@ -1,4 +1,5 @@
 import com.zly.AiTestApplication;
+import com.zly.service.IMilvusService;
 import org.junit.jupiter.api.Test;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
@@ -7,10 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-import java.util.Map;
 
 @SpringBootTest(classes = AiTestApplication.class)
-public class MilnvsTest {
+public class MilvusTest {
 
     @Test
     public void testMilnvs(@Autowired VectorStore vectorStore) {
@@ -35,5 +35,10 @@ public class MilnvsTest {
         // Retrieve documents similar to a query
         List<Document> results = vectorStore.similaritySearch(SearchRequest.builder().query("Spring").topK(5).build());
         System.out.println(results);
+    }
+
+    @Test
+    public void init(@Autowired IMilvusService milvusService) {
+        milvusService.init();
     }
 }

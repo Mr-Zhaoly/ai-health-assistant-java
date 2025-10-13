@@ -21,4 +21,9 @@ public class TesseractTest {
         File file = resource.getFile();
         System.out.println(ocrService.extractTextFromImage(file));
     }
+
+    @Test
+    public void initMilvus() {
+        System.setProperty("jna.library.path", "D:\\Program Files\\Tesseract-OCR\\tessdata");
+    }
 }
