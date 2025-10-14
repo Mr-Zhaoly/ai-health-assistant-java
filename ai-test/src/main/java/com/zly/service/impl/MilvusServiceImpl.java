@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -78,11 +80,10 @@ public class MilvusServiceImpl implements IMilvusService {
             String text = ocrService.extractTextFromImage(imagePath.toFile());
             if(StrUtil.isNotBlank(text)){
                 //获取页码
-                String newText = text.replace("\n", "");
-                String lastChar = newText.substring(newText.length() - 1);
+                Integer pageNum = this.getPageNum(text);
                 Map<String, Object> metadata = new HashMap<>();
-                metadata.put("source", imagePath.getFileName().toString());
-                metadata.put("page", lastChar);
+                metadata.put("source", "中国居民膳食指南（2022）.pdf");
+                metadata.put("page", pageNum);
 
                 Document document = Document.builder()
                         .text(text)
@@ -93,6 +94,23 @@ public class MilvusServiceImpl implements IMilvusService {
             log.info("图片处理完成：{}", text);
         }catch (Exception e){
             log.error("图片处理异常",e);
+        }
+    }
+
+    private Integer getPageNum(String text) {
+        if(StrUtil.isBlank(text)){
+            return 0;
+        }
+        String newText = text.replace("\n", "");
+
+        String lastChar = newText.substring(newText.length() - 3);
+        String regex = "\\d+";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(lastChar);
+        if(matcher.find()){
+            return Integer.valueOf(matcher.group());
+        }else{
+            return 0;
         }
     }
 }

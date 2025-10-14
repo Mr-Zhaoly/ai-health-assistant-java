@@ -1,19 +1,19 @@
 package com.zly.util;
 
+import com.zly.util.splitter.DietaryGuidelinesTokenTextSplitter;
 import org.springframework.ai.document.Document;
-import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 
 import java.util.List;
 
 public class TextSplitterUtil {
 
     public static List<Document> splitDocuments(List<Document> documents) {
-        TokenTextSplitter splitter = new TokenTextSplitter();
+        DietaryGuidelinesTokenTextSplitter splitter = new DietaryGuidelinesTokenTextSplitter();
         return splitter.apply(documents);
     }
 
     public static List<Document> splitCustomized(List<Document> documents) {
-        TokenTextSplitter splitter = new TokenTextSplitter(800, 300, 10, 5000, true);
+        DietaryGuidelinesTokenTextSplitter splitter = new DietaryGuidelinesTokenTextSplitter(800, 10, 5, 5000, false);
         return splitter.apply(documents);
     }
 }
