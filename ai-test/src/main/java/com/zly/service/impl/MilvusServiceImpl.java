@@ -1,6 +1,7 @@
 package com.zly.service.impl;
 
 import cn.hutool.core.util.StrUtil;
+import com.google.common.collect.Lists;
 import com.zly.service.IMilvusService;
 import com.zly.service.IOcrService;
 import com.zly.util.TextSplitterUtil;
@@ -41,8 +42,11 @@ public class MilvusServiceImpl implements IMilvusService {
             List<Document> documents = this.loadAndProcessImages();
             // 对文档进行切割
             documents = TextSplitterUtil.splitDocuments(documents);
-            // 添加到向量存储中
-            vectorStore.add(documents);
+            List<List<Document>> batches = Lists.partition(documents, 10);
+            for (List<Document> batch : batches){
+                // 添加到向量库存储
+                vectorStore.add(batch);
+            }
             return true;
         } catch (Exception e) {
             log.error("初始化Milvus异常",e);
