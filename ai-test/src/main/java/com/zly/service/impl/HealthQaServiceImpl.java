@@ -21,7 +21,7 @@ public class HealthQaServiceImpl implements IHealthQaService {
     private VectorStore vectorStore;
 
     @Autowired
-    private ChatModel chatModel;
+    private DashScopeChatModel dashScopeChatModel;
 
     @Override
     public String getAnswer(String question) {
@@ -32,9 +32,10 @@ public class HealthQaServiceImpl implements IHealthQaService {
                 .map(Document::getText)
                 .collect(Collectors.joining(""));
         // Step 3: 使用上下文生成答案
-        ChatClient chatClient = ChatClient.builder(chatModel).build();
+        ChatClient chatClient = ChatClient.builder(dashScopeChatModel).defaultSystem("你是一个饮食助手，请根据用户的提问回答问题。背景知识： {context}").build();
         String answer = chatClient.prompt()
-                .user(u -> u.text("基于以下上下文回答问题： 上下文： " + context + " 问题：" + question))
+                .system(p->p.param("context", context))
+                .user(u -> u.text(question))
                                 .call()
                                 .content();
         return answer;
