@@ -33,4 +33,12 @@ spring:
 tesseract:
   data-path: D:/Program Files/Tesseract-OCR/tessdata
   language: chi_sim+eng
+logging:
+  level:
+    org:
+      springframework:
+        ai:
+          chat:
+            client:
+              advisor: DEBUG
 
