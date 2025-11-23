@@ -19,7 +19,7 @@ public class HealthQaController {
     @PostMapping("/ask")
     public ResultT<String> askQuestion(@RequestBody QuestionRequestDTO request) {
         // 处理用户提出的健康问题
-        String answer = healthQaService.getAnswer(request.getQuestion());
+        String answer = healthQaService.getAnswer(request);
         return ResultT.success(answer);
     }
 }

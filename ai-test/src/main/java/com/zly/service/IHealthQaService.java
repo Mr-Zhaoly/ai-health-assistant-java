@@ -1,5 +1,7 @@
 package com.zly.service;
 
+import com.zly.model.dto.QuestionRequestDTO;
+
 public interface IHealthQaService {
-    String getAnswer(String question);
+    String getAnswer(QuestionRequestDTO requestDTO);
 }
