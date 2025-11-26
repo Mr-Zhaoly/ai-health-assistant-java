@@ -25,6 +25,7 @@
         <spring-boot.version>3.5.6</spring-boot.version>
         <spring-ai.version>1.0.2</spring-ai.version>
         <spring-ai-alibaba.version>1.0.0.2</spring-ai-alibaba.version>
+        <jedis.version>5.2.0</jedis.version>
     </properties>
     <dependencies>
         <dependency>

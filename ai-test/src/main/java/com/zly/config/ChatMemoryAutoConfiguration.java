@@ -1,26 +1,51 @@
 package com.zly.config;
 
+import com.alibaba.cloud.ai.memory.redis.RedisChatMemoryRepository;
 import org.springframework.ai.chat.memory.ChatMemory;
-import org.springframework.ai.chat.memory.ChatMemoryRepository;
-import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@AutoConfiguration
-@ConditionalOnClass({ ChatMemory.class, ChatMemoryRepository.class })
+@Configuration
 public class ChatMemoryAutoConfiguration {
+//    @Bean
+//    @ConditionalOnMissingBean
+//    ChatMemoryRepository chatMemoryRepository() {
+//        return new InMemoryChatMemoryRepository();
+//    }
+//
+//    @Bean
+//    @ConditionalOnMissingBean
+//    ChatMemory chatMemory(ChatMemoryRepository chatMemoryRepository) {
+//        return MessageWindowChatMemory.builder().chatMemoryRepository(chatMemoryRepository).build();
+//    }
+
+    @Value("${spring.ai.memory.redis.host}")
+    private String redisHost;
+    @Value("${spring.ai.memory.redis.port}")
+    private int redisPort;
+    @Value("${spring.ai.memory.redis.password}")
+    private String redisPassword;
+    @Value("${spring.ai.memory.redis.timeout}")
+    private int redisTimeout;
+
     @Bean
-    @ConditionalOnMissingBean
-    ChatMemoryRepository chatMemoryRepository() {
-        return new InMemoryChatMemoryRepository();
+    public RedisChatMemoryRepository redisChatMemoryRepository() {
+        return RedisChatMemoryRepository.builder()
+                .host(redisHost)
+                .port(redisPort)
+                // 若没有设置密码则注释该项
+                // .password(redisPassword)
+                .timeout(redisTimeout)
+                .build();
     }
 
     @Bean
-    @ConditionalOnMissingBean
-    ChatMemory chatMemory(ChatMemoryRepository chatMemoryRepository) {
-        return MessageWindowChatMemory.builder().chatMemoryRepository(chatMemoryRepository).build();
+    ChatMemory chatMemory(RedisChatMemoryRepository chatMemoryRepository) {
+        return MessageWindowChatMemory
+                .builder()
+                .maxMessages(20)
+                .chatMemoryRepository(chatMemoryRepository).build();
     }
 }

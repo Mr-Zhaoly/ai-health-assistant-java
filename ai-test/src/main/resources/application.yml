@@ -29,6 +29,12 @@ spring:
         embedding-field-name: vector
         metadata-field-name: meata
         content-field-name: content
+    memory:
+      redis:
+        host: localhost
+        port: 6379
+        timeout: 5000
+        password:
 
 tesseract:
   data-path: D:/Program Files/Tesseract-OCR/tessdata
