@@ -49,6 +49,7 @@ public class HealthQaServiceImpl implements IHealthQaService {
                 .defaultAdvisors(
                         PromptChatMemoryAdvisor.builder(chatMemory).build()
                 )
+                .defaultSystem(resource)
                 .build();
     }
 

@@ -45,7 +45,7 @@ public class ChatMemoryAutoConfiguration {
     ChatMemory chatMemory(RedisChatMemoryRepository chatMemoryRepository) {
         return MessageWindowChatMemory
                 .builder()
-                .maxMessages(20)
+                .maxMessages(10)
                 .chatMemoryRepository(chatMemoryRepository).build();
     }
 }
