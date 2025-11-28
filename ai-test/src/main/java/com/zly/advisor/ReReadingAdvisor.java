@@ -1,14 +1,12 @@
 package com.zly.advisor;
 
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 import org.springframework.ai.chat.client.ChatClientRequest;
 import org.springframework.ai.chat.client.ChatClientResponse;
 import org.springframework.ai.chat.client.advisor.api.AdvisorChain;
 import org.springframework.ai.chat.client.advisor.api.BaseAdvisor;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
-import org.springframework.stereotype.Service;
 
 import java.util.Map;
 

@@ -9,15 +9,17 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.zly</groupId>
-    <artifactId>ai-health-assistant-java</artifactId>
+    <artifactId>ai-assistant-list-java</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>ai-health-assistant-java</name>
-    <description>ai-health-assistant-java</description>
+    <name>ai-assistant-list-java</name>
+    <description>ai-assistant-list-java</description>
     <url/>
     <modules>
         <module>ai-test</module>
         <module>milvus-manage</module>
+        <module>database-assistant</module>
+        <module>ai-common</module>
     </modules>
 
     <properties>
@@ -26,22 +28,10 @@
         <spring-ai.version>1.0.2</spring-ai.version>
         <spring-ai-alibaba.version>1.0.0.2</spring-ai-alibaba.version>
         <jedis.version>5.2.0</jedis.version>
+        <knife4j.version>3.0.3</knife4j.version>
+        <project.version>0.0.1-SNAPSHOT</project.version>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
