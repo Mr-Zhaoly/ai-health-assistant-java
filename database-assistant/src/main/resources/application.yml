@@ -1,0 +1,47 @@
+server:
+  port: 8082
+spring:
+  profiles:
+    active: dev
+  ai:
+    dashscope:
+      api-key: ${DASHSCOPE_API_KEY}
+      embedding:
+        options:
+          model: text-embedding-v3
+      chat:
+        options:
+          model: deepseek-v3
+    vectorstore:
+      milvus:
+        client:
+          host: "localhost"
+          port: 19530
+          username: "root"
+          password: "milvus"
+        databaseName: "database_assistant"
+        collectionName: "table_collection"
+        embeddingDimension: 1024
+        indexType: FLAT
+        metricType: COSINE
+        auto-id: true
+        id-field-name: id
+        embedding-field-name: vector
+        metadata-field-name: meata
+        content-field-name: content
+    memory:
+      redis:
+        host: localhost
+        port: 6379
+        timeout: 5000
+        password:
+
+logging:
+  level:
+    org:
+      springframework:
+        ai:
+          chat:
+            client:
+              advisor: DEBUG
+
