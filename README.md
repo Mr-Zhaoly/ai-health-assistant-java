@@ -1,2 +1,2 @@
-# ai-health-assistant-java
-基于中国膳食指南的AI健康助手
+# ai-assistant-list-java
+AI助手集合
