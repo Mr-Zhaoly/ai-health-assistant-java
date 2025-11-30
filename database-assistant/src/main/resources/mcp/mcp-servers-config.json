@@ -1,12 +1,13 @@
 {
   "mcpServers": {
-    "mcp-server-weather": {
-      "command": "java",
+    "mysql": {
+      "command": "cmd",
       "args": [
-        "-Dspring.ai.mcp.server.stdio=true",
-        "-Dlogging.pattern.console=",
-        "-jar",
-          "D:\\ideaworkspace\\git_pull\\spring-ai-parent\\07mcp-stdio-server\\target\\07mcp-stdio-server-0.0.1-xs.jar"
+        "/c",
+        "npx",
+        "-y",
+        "@fhuang/mcp-mysql-server",
+        "mysql://root:J2bZ4wo07G8ntha@47.251.65.112:3306/datax"
       ]
     }
   }
