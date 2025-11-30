@@ -7,7 +7,7 @@
         "npx",
         "-y",
         "@fhuang/mcp-mysql-server",
-        "mysql://root:J2bZ4wo07G8ntha@47.251.65.112:3306/datax"
+        "mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${MYSQL_HOST}:${MYSQL_PORT}/datax"
       ]
     }
   }
