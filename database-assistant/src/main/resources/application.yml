@@ -19,8 +19,8 @@ spring:
           port: 19530
           username: "root"
           password: "milvus"
-        databaseName: "database_assistant"
-        collectionName: "table_collection"
+        databaseName: "ai_health_assistant"
+        collectionName: "dietary_guidelines"
         embeddingDimension: 1024
         indexType: FLAT
         metricType: COSINE
@@ -35,6 +35,22 @@ spring:
         port: 6379
         timeout: 5000
         password:
+    mcp:
+      client:
+        request-timeout: 60000
+        stdio:
+          # 1. 单独放在一个json文件（推荐）
+#          servers-configuration: classpath:/mcp/mcp-servers-config.json
+          #2. 直接配置全局配置文件中
+          connections:
+            mysql:
+              command: cmd
+              args:
+                - /c
+                - npx
+                - -y
+                - '@fhuang/mcp-mysql-server'
+                - mysql://root:J2bZ4wo07G8ntha@47.251.65.112:3306/datax
 
 logging:
   level:
